@@ -6,7 +6,6 @@ import com.hiimgary.techwiser.persistence.TechyDao
 
 class NewRepository constructor(
     private val techyDao: TechyDao,
-    private val techyCacheEntity: TechyCacheEntity,
     private val techyCacheMapper: TechyCacheMapper,
 ) {
 }

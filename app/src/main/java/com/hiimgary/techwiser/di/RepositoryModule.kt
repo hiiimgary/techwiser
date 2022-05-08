@@ -23,16 +23,12 @@ object RepositoryModule {
     fun provideMainRepository(
         techyDao: TechyDao,
         techyService: TechyService,
-        techyCacheEntity: TechyCacheEntity,
-        techyNetworkEntity: TechyNetworkEntity,
         techyCacheMapper: TechyCacheMapper,
         techyNetworkMapper: TechyNetworkMapper
     ): MainRepository {
         return MainRepository(
             techyDao,
             techyService,
-            techyCacheEntity,
-            techyNetworkEntity,
             techyCacheMapper,
             techyNetworkMapper
         )
@@ -42,12 +38,10 @@ object RepositoryModule {
     @Provides
     fun provideFavoritesRepository(
         techyDao: TechyDao,
-        techyCacheEntity: TechyCacheEntity,
         techyCacheMapper: TechyCacheMapper,
     ): FavoritesRepository {
         return FavoritesRepository(
             techyDao,
-            techyCacheEntity,
             techyCacheMapper,
         )
     }
@@ -56,12 +50,10 @@ object RepositoryModule {
     @Provides
     fun provideNewRepository(
         techyDao: TechyDao,
-        techyCacheEntity: TechyCacheEntity,
         techyCacheMapper: TechyCacheMapper,
     ): NewRepository {
         return NewRepository(
             techyDao,
-            techyCacheEntity,
             techyCacheMapper,
         )
     }

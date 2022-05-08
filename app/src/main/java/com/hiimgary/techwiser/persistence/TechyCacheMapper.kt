@@ -1,8 +1,9 @@
 package com.hiimgary.techwiser.persistence
 
 import com.hiimgary.techwiser.model.Techy
+import javax.inject.Inject
 
-class TechyCacheMapper {
+class TechyCacheMapper @Inject constructor() {
     fun entityToModel(entity: TechyCacheEntity): Techy {
         return Techy(
             quote = entity.quote
