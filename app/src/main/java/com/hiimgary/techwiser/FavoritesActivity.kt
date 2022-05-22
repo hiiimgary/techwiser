@@ -9,6 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.ktx.Firebase
 import com.hiimgary.techwiser.ui.favorites.FavoritesStateEvent
 import com.hiimgary.techwiser.ui.favorites.FavoritesViewModel
 import com.hiimgary.techwiser.ui.favorites.TechyListAdapter
@@ -16,8 +20,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FavoritesActivity: AppCompatActivity() {
+    private lateinit var fbAnalytics: FirebaseAnalytics
     private val favoritesViewModel: FavoritesViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
+        fbAnalytics = Firebase.analytics
         super.onCreate(savedInstanceState)
         setContentView(R.layout.favorites_activity)
 
@@ -37,6 +43,7 @@ class FavoritesActivity: AppCompatActivity() {
                     }
 
                     override fun onDeleteClicked(position: Int) {
+                        logDeleteFavorite(techies[position].quote)
                         favoritesViewModel.deleteFavorite(techies[position])
                     }
                 })
@@ -58,5 +65,10 @@ class FavoritesActivity: AppCompatActivity() {
     public override fun onResume() {
         super.onResume()
         favoritesViewModel.setStateEvent(FavoritesStateEvent.GetFavorites)
+    }
+
+    fun logDeleteFavorite(quote: String) {
+        fbAnalytics.logEvent("delete_favorite") {
+            param("quote", quote) }
     }
 }

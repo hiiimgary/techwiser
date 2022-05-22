@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "44248979124",
+    "project_id": "techwiser-70baa",
+    "storage_bucket": "techwiser-70baa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:44248979124:android:7f3c80afd21ab92b6469e1",
+        "android_client_info": {
+          "package_name": "com.hiimgary.techwiser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "44248979124-gf70i99v3nqr5b3o65oe7q589pntr2oh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfQ4y6oXhkln1tO7dGk1qT6hNprCVcMQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "44248979124-gf70i99v3nqr5b3o65oe7q589pntr2oh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

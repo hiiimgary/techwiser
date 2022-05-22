@@ -9,6 +9,10 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.ktx.Firebase
 import com.hiimgary.techwiser.model.Techy
 import com.hiimgary.techwiser.ui.main.MainStateEvent
 import com.hiimgary.techwiser.ui.main.MainViewModel
@@ -22,7 +26,10 @@ class MainActivity: AppCompatActivity() {
 
     private var currentTechy: Techy? = null
 
+    private lateinit var fbAnalytics: FirebaseAnalytics
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        fbAnalytics = Firebase.analytics
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
@@ -46,7 +53,10 @@ class MainActivity: AppCompatActivity() {
 
         val favoriteButton = findViewById<ImageButton>(R.id.favorite)
         favoriteButton.setOnClickListener {
-            currentTechy?.let { t -> mainViewModel.markAsFavorite(t) }
+            currentTechy?.let { t ->
+                logAddedToFavorite(t.quote)
+                mainViewModel.markAsFavorite(t)
+            }
             mainViewModel.setStateEvent(MainStateEvent.GetTechyQuote)
             loadImage()
         }
@@ -56,6 +66,11 @@ class MainActivity: AppCompatActivity() {
             val intent = Intent(baseContext, FavoritesActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    fun logAddedToFavorite(quote: String) {
+        fbAnalytics.logEvent("add_to_favorite") {
+            param("quote", quote) }
     }
 
     fun loadImage() {

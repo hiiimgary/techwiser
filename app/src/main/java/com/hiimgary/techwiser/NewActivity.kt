@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.hiimgary.techwiser.model.Techy
 import com.hiimgary.techwiser.ui.favorites.FavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.RuntimeException
 
 @AndroidEntryPoint
 class NewActivity: AppCompatActivity() {
@@ -28,6 +29,11 @@ class NewActivity: AppCompatActivity() {
         val closeBtn = findViewById<Button>(R.id.close)
         closeBtn.setOnClickListener {
             finish()
+        }
+
+        val crashBtn = findViewById<Button>(R.id.crash)
+        crashBtn.setOnClickListener {
+            throw RuntimeException("TEST CRASH")
         }
 
         val saveBtn = findViewById<Button>(R.id.save)
