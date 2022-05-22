@@ -30,7 +30,7 @@ class TechyDaoInstrumentationTest {
     fun canAddFavorite() {
         val techy = TechyCacheEntity(1, "Hello World")
         runBlocking {
-            techyDao.addFavorite(techy);
+            techyDao.addFavorite(techy)
             assert(techyDao.getFavorites().contains(techy))
         }
     }
@@ -39,8 +39,8 @@ class TechyDaoInstrumentationTest {
     fun canUpdateFavorite() {
         val techy = TechyCacheEntity(1, "Hello World")
         runBlocking {
-            techyDao.addFavorite(techy);
-            techyDao.updateFavorite("Hello World", "Hello World 2");
+            techyDao.addFavorite(techy)
+            techyDao.updateFavorite("Hello World", "Hello World 2")
             assert(!techyDao.getFavorites().contains(techy))
             assert(techyDao.getFavorites().contains(TechyCacheEntity(1, "Hello World 2")))
         }
@@ -50,8 +50,8 @@ class TechyDaoInstrumentationTest {
     fun canDeleteFavorite() {
         val techy = TechyCacheEntity(1, "Hello World")
         runBlocking {
-            techyDao.addFavorite(techy);
-            techyDao.deleteFavorite("Hello World");
+            techyDao.addFavorite(techy)
+            techyDao.deleteFavorite("Hello World")
             assert(!techyDao.getFavorites().contains(techy))
         }
     }
@@ -61,10 +61,10 @@ class TechyDaoInstrumentationTest {
         val techy1 = TechyCacheEntity(1, "Hello World")
         val techy2 = TechyCacheEntity(2, "Hello World 2")
         runBlocking {
-            techyDao.addFavorite(techy1);
-            techyDao.addFavorite(techy2);
-            assert(techyDao.getFavorites().contains(techy1));
-            assert(techyDao.getFavorites().contains(techy2));
+            techyDao.addFavorite(techy1)
+            techyDao.addFavorite(techy2)
+            assert(techyDao.getFavorites().contains(techy1))
+            assert(techyDao.getFavorites().contains(techy2))
         }
     }
 }
