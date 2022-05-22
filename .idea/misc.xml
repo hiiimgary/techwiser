@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< Updated upstream
         <entry key="app/src/main/res/layout/main_fragment.xml" value="0.13697916666666668" />
+=======
+        <entry key="app/src/main/res/layout/main_fragment.xml" value="0.2006340579710145" />
+>>>>>>> Stashed changes
       </map>
     </option>
   </component>
