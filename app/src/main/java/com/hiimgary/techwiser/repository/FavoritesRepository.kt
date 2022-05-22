@@ -15,4 +15,16 @@ class FavoritesRepository constructor(
         val techies = techyCacheMapper.entityListToModelList(techyDao.getFavorites())
         emit(techies)
     }
+
+    suspend fun deleteFavorite(techy: Techy) {
+        techyDao.deleteFavorite(techy.quote)
+    }
+
+    suspend fun addToFavorite(techy: Techy) {
+        techyDao.addFavorite(techyCacheMapper.modelToEntity(techy))
+    }
+
+    suspend fun updateFavorite(oldQuote: String, newQuote: String) {
+        techyDao.updateFavorite(oldQuote, newQuote)
+    }
 }

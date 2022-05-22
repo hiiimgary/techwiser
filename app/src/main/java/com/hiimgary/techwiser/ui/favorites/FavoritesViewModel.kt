@@ -30,6 +30,33 @@ class FavoritesViewModel @Inject constructor(
             }
         }
     }
+
+    fun deleteFavorite(techy: Techy) {
+        viewModelScope.launch {
+            favoritesRepository.deleteFavorite(techy)
+            favoritesRepository.getFavorites().onEach { s ->
+                _state.value = s
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    fun addFavorite(techy: Techy) {
+        viewModelScope.launch {
+            favoritesRepository.addToFavorite(techy)
+            favoritesRepository.getFavorites().onEach { s ->
+                _state.value = s
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    fun updateFavorite(oldQuote: String, newQuote: String) {
+        viewModelScope.launch {
+            favoritesRepository.updateFavorite(oldQuote, newQuote)
+            favoritesRepository.getFavorites().onEach { s ->
+                _state.value = s
+            }.launchIn(viewModelScope)
+        }
+    }
 }
 
 sealed class FavoritesStateEvent {

@@ -3,6 +3,7 @@ package com.hiimgary.techwiser
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -25,12 +26,37 @@ class FavoritesActivity: AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
         favoritesViewModel.state.observe(this, Observer {
-            techies -> recyclerView.adapter = TechyListAdapter(this, techies)
+            techies ->
+                var adapter = TechyListAdapter(this, techies)
+                recyclerView.adapter = adapter
+                adapter.setOnItemClickListener(object : TechyListAdapter.onItemClickListener{
+                    override fun onEditClicked(position: Int) {
+                        val intent = Intent(baseContext, NewActivity::class.java)
+                        intent.putExtra("QUOTE", techies[position].quote)
+                        startActivity(intent)
+                    }
+
+                    override fun onDeleteClicked(position: Int) {
+                        favoritesViewModel.deleteFavorite(techies[position])
+                    }
+                })
         })
 
         val homeButton = findViewById<Button>(R.id.home)
         homeButton.setOnClickListener {
             finish()
         }
+
+        val addButton = findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.add)
+        addButton.setOnClickListener {
+            val intent = Intent(baseContext, NewActivity::class.java)
+            intent.putExtra("QUOTE", "")
+            startActivity(intent)
+        }
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        favoritesViewModel.setStateEvent(FavoritesStateEvent.GetFavorites)
     }
 }

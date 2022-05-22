@@ -11,6 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TechWiser">
         <activity
+            android:name=".NewActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
             android:name=".FavoritesActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan"/>
